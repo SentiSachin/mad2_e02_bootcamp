@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
+    <style>
+        .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #fccb90;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+        }
+
+        @media (min-width: 768px) {
+        .gradient-form {
+        height: 100vh !important;
+        }
+        }
+        @media (min-width: 769px) {
+        .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+        }
+        }
+               /* Add your custom styles here */
+               body {
+            background-color: #f8f9fa;
+        }
+
+        .user-info {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .song-list {
+            margin-top: 20px;
+        }
+
+        .current-song {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ffffff;
+        } 
+    </style>
+</head>
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+</body>
+<script type="module">
+
+    import LoginView from '../static/auth/login.js'
+    import WelcomeView from '../static/view/welcome.js'
+    var router = new VueRouter({
+    routes: [
+        { path: '/login', component: LoginView },
+        { path: '/user', component: WelcomeView },
+    ]
+    })
+
+    var app = new Vue({
+        el: '#app',
+        router: router,
+        data: {
+            message: 'Hello Vue! My first vue2 app with flask integration using cdn links'
+        },
+        delimiters: ['${', '}']
+    })
+</script>
+</html>
