@@ -55,7 +55,7 @@ const WelcomeView = Vue.component('welview', {
                     } else if (response.status === 401) {
                         alert(data.error);
                     } else if (response.status === 403) {
-                        alert(data.error)
+                        alert(data.msg)
                     }
                     else {
                         alert(`An error occurred: ${response.statusText}`);

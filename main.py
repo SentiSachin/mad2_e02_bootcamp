@@ -10,6 +10,23 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from application.data.database import db
 from application.data.models import User
+from functools import wraps
+from flask import jsonify
+from flask_jwt_extended import verify_jwt_in_request, get_jwt
+
+
+# Decorator for verifying role
+def role_required(role):
+    def wrapper(fn):
+        @wraps(fn)
+        def decorator(*args, **kwargs):
+
+            if current_user.role == role:
+                return fn(*args, **kwargs)
+            else:
+                return jsonify(msg="You don't have permission xyz!"), 403
+        return decorator
+    return wrapper
 
 
 app = Flask(__name__)
@@ -45,6 +62,7 @@ def index():
 
 @app.route("/who_am_i", methods=["GET"])
 @jwt_required()
+@role_required("user")
 def protected():
     # We can now access our sqlalchemy User object via `current_user`.
     return jsonify(

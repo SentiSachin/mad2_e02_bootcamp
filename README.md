@@ -20,3 +20,5 @@ pip install flask
 pip install Flask-SQLAlchemy
 
 # vue2 for frontend
+# to install all the dependencies from requirements.txt
+pip install -r requirements.txt
