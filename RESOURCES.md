@@ -1,0 +1,1 @@
+[flask-sqlalchemy official document](https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/)

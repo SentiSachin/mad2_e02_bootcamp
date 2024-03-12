@@ -39,7 +39,7 @@ const WelcomeView = Vue.component('welview', {
     methods: {
         async getdata() {
             try {
-                const apiUrl = 'http://127.0.0.1:5000/protected';
+                const apiUrl = 'http://127.0.0.1:5000/who_am_i';
                 const response = await fetch(apiUrl, {
                     method: 'GET',
                     headers: {
@@ -65,7 +65,7 @@ const WelcomeView = Vue.component('welview', {
 
                 const data = await response.json();
                 console.log('Fetched data:', data);
-                this.logged_in_as = data.logged_in_as;
+                this.logged_in_as = data.username;
             } catch (error) {
                 console.error('Fetch error:', error);
                 // Optionally, notify the user or perform other error-handling actions
