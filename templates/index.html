@@ -61,11 +61,15 @@
 <script type="module">
 
     import LoginView from '../static/auth/login.js'
+    import RegisterVue from '../static/auth/register.js'
     import WelcomeView from '../static/view/welcome.js'
+    import IndexView from '../static/view/index.js'
     var router = new VueRouter({
     routes: [
+        { path: '/', component: IndexView },
         { path: '/login', component: LoginView },
         { path: '/user', component: WelcomeView },
+        { path: '/register', component: RegisterVue },
     ]
     })
 

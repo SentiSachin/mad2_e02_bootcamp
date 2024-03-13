@@ -62,7 +62,7 @@ def index():
 
 @app.route("/who_am_i", methods=["GET"])
 @jwt_required()
-@role_required("user")
+@role_required("admin")
 def protected():
     # We can now access our sqlalchemy User object via `current_user`.
     return jsonify(

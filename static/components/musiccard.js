@@ -1,30 +1,17 @@
-
-
-const WelcomeView = Vue.component('welview', {
+const MusicCard = Vue.component('musiccard', {
     template: `
-    <section>
-
-
-    <!-- Song List -->
-    <section class="container song-list">
-        <h2>All Songs</h2>
-        <ul class="list-group">
-            <li class="list-group-item">Song 1</li>
-            <li class="list-group-item">Song 2</li>
-            <li class="list-group-item">Song 3</li>
-            <!-- Add more songs as needed -->
-        </ul>
-    </section>
-
-    <!-- Current Playing Song -->
-    <section class="container current-song">
-        <h2>Now Playing</h2>
-        <p>Song: Song 1</p>
-        <p>Artist: Artist 1</p>
-        <p>Duration: 3:30</p>
-        <!-- Add more information about the currently playing song as needed -->
-    </section>
-</section>
+    <div class="col">
+        <div class="card h-100">
+        <img src="/static/assests/musiclogo.jpeg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Song Title</h5>
+            <p class="card-text">Artist: Artist Name</p>
+            <p class="card-text">Album: Album Name</p>
+            <p class="card-text">Genre: Genre Name</p>
+            <a href="#" class="btn btn-primary">Play</a>
+        </div>
+        </div>
+    </div>
     `,
     data() {
         return {
@@ -71,4 +58,4 @@ const WelcomeView = Vue.component('welview', {
     }
 });
 
-export default WelcomeView; 
+export default MusicCard; 
