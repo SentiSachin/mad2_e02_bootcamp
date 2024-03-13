@@ -99,7 +99,8 @@ const LoginView = Vue.component('loginview', {
                 const data = await response.json();
                 console.log('Fetched data:', data);
                 alert('Login success!');
-                sessionStorage.setItem("access_token", data['access_token']);
+                sessionStorage.setItem("access-token", data['access_token']);
+                this.$router.push('/');
             } catch (error) {
                 console.error('Fetch error:', error);
                 // Optionally, notify the user or perform other error-handling actions

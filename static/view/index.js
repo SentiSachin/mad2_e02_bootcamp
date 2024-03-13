@@ -8,7 +8,7 @@ const IndexView = Vue.component('indexview', {
             <div class="row">
                 <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#">Navbar</a>
+                        <h3><span class="badge text-bg-secondary">BS Music</span></h3>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -20,26 +20,13 @@ const IndexView = Vue.component('indexview', {
                                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Link</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        Dropdown
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    </ul>
+                                    <a class="nav-link" style="cursor:pointer" @click="login()">Login</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                                    <a class="nav-link" style="cursor:pointer" @click="register()">Register</a>
                                 </li>
                             </ul>
+                            <button @click="showerror()">error</button>
                             <form class="d-flex" role="search">
                                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                                 <button class="btn btn-outline-light text-dark" type="submit">Search</button>
@@ -135,8 +122,18 @@ const IndexView = Vue.component('indexview', {
                 console.error('Fetch error:', error);
                 // Optionally, notify the user or perform other error-handling actions
             }
+        },
+        showerror(){
+            this.$router.push('/');
+        },
+        login() {
+            if(this.$route.path !== '/login')        
+                this.$router.push('/login');
+        },
+        register() {
+            if(this.$route.path !== '/register')        
+                this.$router.push('/register');
         }
-
 
     },
     components: {

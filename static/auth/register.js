@@ -9,26 +9,22 @@ const RegisterVue = Vue.component('register', {
             <div class="card-body">
                 <form @submit.prevent="register">
                     <div class="mb-3">
-                        <label for="exampleInputUsername1" class="form-label">Email address</label>
-                        <input type="text" class="form-control" id="exampleInputUsername1" name="username"
+                        <label for="exampleInputUsername1" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="exampleInputUsername1" v-model="username"
                             aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                        <input type="email" class="form-control" id="exampleInputEmail1" v-model="email"
                             aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                        <input type="password" v-model="password" class="form-control" id="exampleInputPassword1">
                     </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Register</button>
                 </form>
             </div>
         </div>
@@ -38,7 +34,7 @@ const RegisterVue = Vue.component('register', {
     data(){
         return {
             email: null,
-            passowrd: null,
+            password: null,
             username: null
         }
     },
@@ -72,7 +68,8 @@ const RegisterVue = Vue.component('register', {
                     throw new Error(`Network response was not ok: ${response.statusText}`);
                 }
                 const data = await response.json();
-                alert('Register success!');
+                alert(data.message);
+                this.$router.push('/login');
             }catch (error) {
                 console.error('There was an error!', error);
             }

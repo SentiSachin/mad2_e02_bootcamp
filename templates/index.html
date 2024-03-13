@@ -64,10 +64,10 @@
     import RegisterVue from '../static/auth/register.js'
     import WelcomeView from '../static/view/welcome.js'
     import IndexView from '../static/view/index.js'
-    var router = new VueRouter({
+    const router = new VueRouter({
     routes: [
-        { path: '/', component: IndexView },
-        { path: '/login', component: LoginView },
+        { path: '/', component: IndexView},
+        { path: '/login', component: LoginView, name: 'Login'},
         { path: '/user', component: WelcomeView },
         { path: '/register', component: RegisterVue },
     ]
@@ -81,5 +81,10 @@
         },
         delimiters: ['${', '}']
     })
+
+    // router.beforeEach((to, from, next) => {
+    //     if (to.name !== '/login' && !sessionStorage.getItem('access-token') ) this.$router.push('/login')
+    //     else next()
+    // })
 </script>
 </html>

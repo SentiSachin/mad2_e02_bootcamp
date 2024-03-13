@@ -13,7 +13,7 @@ from application.data.models import User
 from functools import wraps
 from flask import jsonify
 from flask_jwt_extended import verify_jwt_in_request, get_jwt
-
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # Decorator for verifying role
 def role_required(role):
@@ -97,6 +97,21 @@ def login():
 #     # Access the identity of the current user with get_jwt_identity
 #     current_user = get_jwt_identity()
 #     return jsonify(logged_in_as=current_user), 200
+
+@app.route('/register', methods=['POST'])
+def signup_post():
+    data = request.get_json()
+    user = User.query.filter_by(email=data["email"]).first()
+    if user:
+        return jsonify({'error': 'User already exists'}), 409
+    else:
+        new_user = User(email=data["email"], username=data["username"],
+                        role='user',
+                        password=generate_password_hash(data["password"],
+                                                        method='scrypt'))
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({'message': 'User created'}), 201
 
 
 if __name__ == "__main__":
