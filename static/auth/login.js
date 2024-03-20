@@ -36,7 +36,7 @@ const LoginView = Vue.component('loginview', {
 
                                         <div class="d-flex align-items-center justify-content-center pb-4">
                                             <p class="mb-0 me-2">Don't have an account?</p>
-                                            <button type="button" class="btn btn-outline-danger">Create new</button>
+                                            <button type="button" class="btn btn-outline-danger" @click="register()">Create new</button>
                                         </div>
 
                                     </form>
@@ -99,14 +99,16 @@ const LoginView = Vue.component('loginview', {
                 const data = await response.json();
                 console.log('Fetched data:', data);
                 alert('Login success!');
-                sessionStorage.setItem("access-token", data['access_token']);
                 this.$router.push('/');
             } catch (error) {
                 console.error('Fetch error:', error);
                 // Optionally, notify the user or perform other error-handling actions
             }
+        },
+        register() {
+            if(this.$route.path !== '/register')        
+                this.$router.push('/register');
         }
-
 
     }
 });

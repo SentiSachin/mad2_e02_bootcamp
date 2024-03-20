@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Simple Music Player</title>
+<!-- Load FontAwesome icons -->
+<link rel="stylesheet"
+		href=
+"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<!-- Load the custom CSS style file -->
+</head>
+<body>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="card d-flex justify-content-center text-center" style="width: 18rem;">
+    <div class="now-playing">PLAYING x OF y</div>
+    <img src="/static/assests/musiclogo.jpeg" class="rounded img-thumbnail mx-auto d-block" alt="..." style="height: 200px; width: 200px;">
+  
+    <div class="card-body text-center">
+      <h5 class="track-name card-title">Track Name</h5>
+      <p class="track-artist card-text">Track Artist</p>
+      <div class="d-flex justify-content-center"> <!-- Center the buttons -->
+        <div class="prev-track me-3" onclick="prevTrack()">
+          <i class="fa fa-step-backward fa-1x"></i>
+        </div>
+        <div class="playpause-track me-3" onclick="playpauseTrack()">
+          <i class="fa fa-play-circle fa-2x"></i>
+        </div>
+        <div class="next-track" onclick="nextTrack()">
+          <i class="fa fa-step-forward fa-1x"></i>
+        </div>
+      </div>
+      <div class="slider_container d-flex justify-content-center"> <!-- Center the time and seek input -->
+        <div class="current-time">00:00</div>
+        <input class="seek_slider" type="range" min="1" max="100" value="0" onchange="seekTo()">
+        <div class="total-duration">00:00</div>
+      </div>
+      <div class="slider_container d-flex justify-content-center"> <!-- Center the volume controls -->
+        <i class="fa fa-volume-down"></i>
+        <input type="range" min="1" max="100" value="99" class="volume_slider" onchange="setVolume()">
+        <i class="fa fa-volume-up"></i>
+      </div>
+    </div>
+  </div>
+</div>  
+<!-- Load the main script for the player -->
+<script src="main.js"></script>
+</body>
+</html>

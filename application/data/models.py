@@ -1,6 +1,6 @@
 from application.data.database import db
-from hmac import compare_digest
-
+# from hmac import compare_digest
+from werkzeug.security import check_password_hash
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -12,8 +12,16 @@ class User(db.Model):
 
     # NOTE: In a real application make sure to properly hash and salt passwords
     def check_password(self, password):
-        return compare_digest(password, self.password)
+        return check_password_hash(self.password, password)
 
+
+
+
+class Album(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(100), nullable=False)
+    genre = db.Column(db.String(100), nullable=False)
+    tracks = db.relationship('Track', lazy=True)
 
 class Playlist(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -21,12 +29,16 @@ class Playlist(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     tracks = db.relationship('Track', backref='playlist', lazy=True)
 
-
 class Track(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(100), nullable=False)
     artist = db.Column(db.String(100), nullable=False)
     album = db.Column(db.String(100))
+    lyrics = db.Column(db.String(200))
+    audio_data = db.Column(db.LargeBinary, nullable=False)
+    audio_type = db.Column(db.String(200))
     duration = db.Column(db.Integer)
     playlist_id = db.Column(db.Integer, db.ForeignKey('playlist.id'),
                             nullable=False)
+    album_id = db.Column(db.Integer, db.ForeignKey('album.id'), nullable=False)
+
