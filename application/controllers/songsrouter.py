@@ -71,6 +71,7 @@ def get_curr_songs():
     tracks = Track.query.all()
     songs = [
         {
+            'id': song.id,
             'artist': song.artist,
             'name': song.title,
             'image': None,

@@ -6,7 +6,7 @@ const store = new Vuex.Store({
     //   managers: [],
     //   cart: [],
     //   orders: [],
-    currentSongId:'',
+    currentSongId:null,
       isAuthenticated:'',
     },
     getters: {

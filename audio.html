@@ -1,48 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Simple Music Player</title>
-<!-- Load FontAwesome icons -->
-<link rel="stylesheet"
-		href=
-"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-<!-- Load the custom CSS style file -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player App</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Add your custom CSS styles here */
+  </style>
 </head>
 <body>
-<div class="d-flex justify-content-center align-items-center">
-  <div class="card d-flex justify-content-center text-center" style="width: 18rem;">
-    <div class="now-playing">PLAYING x OF y</div>
-    <img src="/static/assests/musiclogo.jpeg" class="rounded img-thumbnail mx-auto d-block" alt="..." style="height: 200px; width: 200px;">
-  
-    <div class="card-body text-center">
-      <h5 class="track-name card-title">Track Name</h5>
-      <p class="track-artist card-text">Track Artist</p>
-      <div class="d-flex justify-content-center"> <!-- Center the buttons -->
-        <div class="prev-track me-3" onclick="prevTrack()">
-          <i class="fa fa-step-backward fa-1x"></i>
-        </div>
-        <div class="playpause-track me-3" onclick="playpauseTrack()">
-          <i class="fa fa-play-circle fa-2x"></i>
-        </div>
-        <div class="next-track" onclick="nextTrack()">
-          <i class="fa fa-step-forward fa-1x"></i>
+  <div id="app" class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>All Songs</h2>
+        <div class="scrollable-songs">
+          <div v-for="song in songs" :key="song.id" class="song">
+            <button @click="playSong(song)" class="btn btn-primary">Play</button>
+            <span>{{ song.title }}</span>
+          </div>
         </div>
       </div>
-      <div class="slider_container d-flex justify-content-center"> <!-- Center the time and seek input -->
-        <div class="current-time">00:00</div>
-        <input class="seek_slider" type="range" min="1" max="100" value="0" onchange="seekTo()">
-        <div class="total-duration">00:00</div>
-      </div>
-      <div class="slider_container d-flex justify-content-center"> <!-- Center the volume controls -->
-        <i class="fa fa-volume-down"></i>
-        <input type="range" min="1" max="100" value="99" class="volume_slider" onchange="setVolume()">
-        <i class="fa fa-volume-up"></i>
+      <div class="col-md-6">
+        <h2>Current Playing</h2>
+        <div class="current-song" v-if="currentSong">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ currentSong.title }}</h5>
+              <p class="card-text">{{ currentSong.artist }}</p>
+              <!-- You can add more details here -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>  
-<!-- Load the main script for the player -->
-<script src="main.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        songs: [],
+        currentSong: null
+      },
+      mounted() {
+        // Fetch songs from backend Flask API
+        this.fetchSongs();
+      },
+      methods: {
+        fetchSongs() {
+          // Make API call to fetch songs
+          fetch('/api/songs')
+            .then(response => response.json())
+            .then(data => {
+              this.songs = data;
+            })
+            .catch(error => {
+              console.error('Error fetching songs:', error);
+            });
+        },
+        playSong(song) {
+          // Set the current playing song
+          this.currentSong = song;
+        }
+      }
+    });
+  </script>
 </body>
 </html>
